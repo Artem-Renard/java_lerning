@@ -6,7 +6,7 @@ import ru.stqa.pft.sandbox.Square;
 
 public class PointTest {
   @Test
-  public void testArea () {
+  public void testDistance () {
     Point t1 = new Point (0,0);
     Point t2 = new Point (0,3);
     t1.distance(t2);
