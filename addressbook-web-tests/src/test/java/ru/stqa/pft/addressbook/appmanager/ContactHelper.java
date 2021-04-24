@@ -24,4 +24,16 @@ public class ContactHelper extends BaseHelper {
   public void goToAddNewContact() {
     click (By.linkText("add new"));
   }
+
+  public void returnToHomePage() {
+    click (By.linkText("home"));
+  }
+
+  public void editContact() {
+    click (By.cssSelector("img[alt=\"Edit\"]"));
+  }
+
+  public void updateContactForm() {
+    click (By.xpath("(//input[@name='update'])[2]"));
+  }
 }
