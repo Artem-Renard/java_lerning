@@ -36,4 +36,20 @@ public class ContactHelper extends BaseHelper {
   public void updateContactForm() {
     click (By.xpath("(//input[@name='update'])[2]"));
   }
+
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void deleteSelectContact() {
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void acceptDeleteSelectContact() {
+    wd.switchTo().alert().accept();
+  }
+
+  public void expectToHomePage() throws InterruptedException {
+    Thread.sleep(4000);
+  }
 }
