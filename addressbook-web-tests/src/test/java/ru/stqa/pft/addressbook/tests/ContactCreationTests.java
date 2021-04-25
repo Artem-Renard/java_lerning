@@ -13,5 +13,4 @@ public class ContactCreationTests  extends TestBase  {
     app.getNavigationHelper().returnHomePage();
     app.getSessionHelper().logout();
   }
-
 }

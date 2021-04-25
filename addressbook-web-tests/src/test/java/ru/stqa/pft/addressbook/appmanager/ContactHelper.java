@@ -17,7 +17,7 @@ public class ContactHelper extends BaseHelper {
   public void fillAddNewContactForm(ContactData contactData) {
     type (By.name("firstname"), contactData.getFirstname());
     type (By.name("lastname"), contactData.getLastname());
-    type (By.name("home"), contactData.getHomephone());
+    type (By.name("home"), contactData.getHomePhone());
     type (By.name("email"), contactData.getEmail());
   }
 
