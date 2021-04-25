@@ -31,7 +31,7 @@ public class Equation {
 
     } else if (c != 0) {
       n = 0;
-      
+
       } else {
       n = -1;
       }
