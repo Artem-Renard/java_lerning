@@ -34,7 +34,7 @@ public class ContactHelper extends BaseHelper {
     click (By.linkText("add new"));
   }
 
-  public void returnToHomePage() {
+  public void returnHomePage() {
     click (By.linkText("home"));
   }
 
@@ -58,7 +58,7 @@ public class ContactHelper extends BaseHelper {
     wd.switchTo().alert().accept();
   }
 
-  public void expectToHomePage() throws InterruptedException {
+  public void expectHomePage() throws InterruptedException {
     Thread.sleep(4000);
   }
 }
