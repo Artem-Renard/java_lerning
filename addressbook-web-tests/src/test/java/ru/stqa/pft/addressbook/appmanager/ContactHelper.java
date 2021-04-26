@@ -58,7 +58,14 @@ public class ContactHelper extends BaseHelper {
     wd.switchTo().alert().accept();
   }
 
-  public void expectHomePage() throws InterruptedException {
-    Thread.sleep(4000);
+  public void createContact(ContactData contact, boolean creation) {
+    initContactCreation();
+    fillContactForm(contact,creation);
+    submitAddNewContact();
+    returnHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }
