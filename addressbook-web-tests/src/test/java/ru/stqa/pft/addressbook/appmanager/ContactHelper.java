@@ -67,4 +67,8 @@ public class ContactHelper extends BaseHelper {
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
