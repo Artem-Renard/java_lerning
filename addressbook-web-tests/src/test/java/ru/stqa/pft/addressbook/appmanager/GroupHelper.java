@@ -40,7 +40,7 @@ public class GroupHelper extends BaseHelper {
     click(By.name("update"));
   }
 
-  public void returnToGroupPage() {
+  public void goToGroupPage() {
     click(By.linkText("groups"));
   }
 
@@ -48,11 +48,14 @@ public class GroupHelper extends BaseHelper {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
-    returnToGroupPage();
+    goToGroupPage();
   }
 
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
 
+  public int getGroupCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
