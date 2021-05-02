@@ -8,7 +8,7 @@ public class ContactCreationTests  extends TestBase  {
 
   @Test
   public void testContactCreation() throws Exception {
-    int befor = app.getContactHelper().getContactCount();
+    int before = app.getContactHelper().getContactCount();
     app.getContactHelper().createContact(new ContactData(
                     "TestName",
                     "TestLastName",
@@ -18,6 +18,6 @@ public class ContactCreationTests  extends TestBase  {
             false);
     app.getContactHelper().goHomePage();
     int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, befor + 1);
+    Assert.assertEquals(after, before + 1);
   }
 }

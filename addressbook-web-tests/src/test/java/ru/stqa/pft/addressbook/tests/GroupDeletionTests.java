@@ -9,7 +9,7 @@ public class GroupDeletionTests extends TestBase {
   @Test
   public void testDeleteGroup() throws Exception {
     app.getNavigationHelper().gotoGroupPage();
-    int befor = app.getGroupHelper().getGroupCount();
+    int before = app.getGroupHelper().getGroupCount();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData(
               "test1",
@@ -20,7 +20,7 @@ public class GroupDeletionTests extends TestBase {
     app.getGroupHelper().deleteSelectedGroups();
     app.getNavigationHelper().gotoGroupPage();
     int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, befor - 1);
+    Assert.assertEquals(after, before - 1);
   }
 
 }

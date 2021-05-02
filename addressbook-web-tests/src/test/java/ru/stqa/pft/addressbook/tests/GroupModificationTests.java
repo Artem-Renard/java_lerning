@@ -9,7 +9,7 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification () {
     app.getNavigationHelper().gotoGroupPage();
-    int befor = app.getGroupHelper().getGroupCount();
+    int before = app.getGroupHelper().getGroupCount();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData(
               "test1",
@@ -25,6 +25,6 @@ public class GroupModificationTests extends TestBase {
     app.getGroupHelper().submitGroupModification();
     app.getNavigationHelper().gotoGroupPage();
     int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, befor);
+    Assert.assertEquals(after, before);
   }
 }

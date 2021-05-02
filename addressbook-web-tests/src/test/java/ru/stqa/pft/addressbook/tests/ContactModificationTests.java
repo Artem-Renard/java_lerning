@@ -8,7 +8,7 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification () {
-    int befor = app.getContactHelper().getContactCount();
+    int before = app.getContactHelper().getContactCount();
     app.getContactHelper().goHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData(
@@ -30,6 +30,6 @@ public class ContactModificationTests extends TestBase {
     app.getContactHelper().initContactModification();
     app.getContactHelper().goHomePage();
     int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, befor);
+    Assert.assertEquals(after, before);
   }
 }

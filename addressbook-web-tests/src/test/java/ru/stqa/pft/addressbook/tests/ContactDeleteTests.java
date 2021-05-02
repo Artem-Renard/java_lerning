@@ -8,7 +8,7 @@ public class ContactDeleteTests extends TestBase {
 
   @Test
   public void testDeleteContact () throws InterruptedException {
-    int befor = app.getContactHelper().getContactCount();
+    int before = app.getContactHelper().getContactCount();
     app.getContactHelper().goHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData(
@@ -24,6 +24,6 @@ public class ContactDeleteTests extends TestBase {
     app.getContactHelper().acceptDeleteSelectContact();
     app.getContactHelper().goHomePage();
     int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, befor - 1);
+    Assert.assertEquals(after, before - 1);
   }
 }

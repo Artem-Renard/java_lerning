@@ -34,7 +34,7 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     navigationHelper = new NavigationHelper(wd);
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);

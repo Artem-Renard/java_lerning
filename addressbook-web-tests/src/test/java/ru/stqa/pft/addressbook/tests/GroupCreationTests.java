@@ -9,14 +9,14 @@ public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() throws Exception {
     app.getGroupHelper().goToGroupPage();
-    int befor = app.getGroupHelper().getGroupCount();
+    int before = app.getGroupHelper().getGroupCount();
     app.getNavigationHelper().gotoGroupPage();
     app.getGroupHelper().createGroup(new GroupData(
             "test1",
             "test2",
             "test3"));
     int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, befor + 1);
+    Assert.assertEquals(after, before + 1);
   }
 
 }
