@@ -55,6 +55,7 @@ public class ContactHelper extends BaseHelper {
 
   public void acceptDeleteSelectContact() {
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 
   public void createContact(ContactData contact, boolean creation) {
@@ -71,4 +72,5 @@ public class ContactHelper extends BaseHelper {
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
+
 }

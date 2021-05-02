@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class DeleteContactTests  extends TestBase {
+public class ContactDeleteTests extends TestBase {
 
   @Test
   public void testDeleteContact () throws InterruptedException {
