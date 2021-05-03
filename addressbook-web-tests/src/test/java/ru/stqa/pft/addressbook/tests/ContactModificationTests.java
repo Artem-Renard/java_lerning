@@ -23,11 +23,11 @@ public class ContactModificationTests extends TestBase {
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().editContact();
     app.getContactHelper().fillContactForm(new ContactData(
-            "1TestName",
-            "1TestLastName",
-            "1TestHomeTelephone",
-            "1TestE-mail@test.ru",
-            null),
+            "TestName",
+            "TestLastName",
+            "TestHomeTelephone",
+            "TestE-mail@test.ru",
+            "[none]"),
             false);
     app.getContactHelper().initContactModification();
     app.getContactHelper().goHomePage();

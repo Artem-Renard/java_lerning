@@ -17,8 +17,8 @@ public class ContactCreationTests  extends TestBase  {
                     "TestLastName",
                     "TestHomeTelephone",
                     "TestE-mail@test.ru",
-                    "test1"),
-                    false);
+                    "[none]"),
+                    true);
     app.getContactHelper().goHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
