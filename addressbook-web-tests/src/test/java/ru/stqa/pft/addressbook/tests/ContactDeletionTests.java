@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-public class ContactDeleteTests extends TestBase {
+public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testDeleteContact () throws InterruptedException {
@@ -19,7 +19,7 @@ public class ContactDeleteTests extends TestBase {
                       "[none]"),
               true);
     }
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().deleteSelectContact();
     app.getContactHelper().acceptDeleteSelectContact();
     app.getContactHelper().goHomePage();
