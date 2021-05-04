@@ -9,7 +9,7 @@ import java.util.List;
 public class ContactDeletionTests extends TestBase {
 
   @Test
-  public void testDeleteContact () throws InterruptedException {
+  public void testDeleteContact () {
     app.getContactHelper().goHomePage();
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData(

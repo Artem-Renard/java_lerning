@@ -9,7 +9,7 @@ import java.util.List;
 public class GroupDeletionTests extends TestBase {
 
   @Test
-  public void testDeleteGroup() throws Exception {
+  public void testDeleteGroup() {
     app.getNavigationHelper().gotoGroupPage();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData(
