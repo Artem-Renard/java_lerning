@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private final String id;
+  private int id;
   private final String firstname;
   private final String lastname;
   private final String homePhone;
@@ -11,14 +11,14 @@ public class ContactData {
   private final String group;
 
   public ContactData(String firstname, String lastname, String homePhone, String email, String group) {
-    this.id = null;
+    this.id = 0;
     this.firstname = firstname;
     this.lastname = lastname;
     this.homePhone = homePhone;
     this.email = email;
     this.group = group;
   }
-  public ContactData(String id, String firstname, String lastname, String homePhone, String email, String group) {
+  public ContactData(int id, String firstname, String lastname, String homePhone, String email, String group) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -27,29 +27,12 @@ public class ContactData {
     this.group = group;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            '}';
+  public void setId(int id) {
+    this.id = id;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname);
   }
 
   public String getFirstname() {
@@ -72,4 +55,24 @@ public class ContactData {
     return group;
   }
 
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id && Objects.equals(firstname, that.firstname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname);
+  }
 }
