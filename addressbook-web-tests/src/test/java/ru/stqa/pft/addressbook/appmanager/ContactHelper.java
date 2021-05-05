@@ -43,12 +43,12 @@ public class ContactHelper extends BaseHelper {
     click (By.linkText("home"));
   }
 
-  public void editContact() {
-    click (By.xpath("//img[@alt='Edit']"));
+  public void editContact(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
   public void initContactModification() {
-    click (By.xpath("(//input[@name='update'])[2]"));
+    click (By.xpath("//div[@id='content']/form/input[22]"));
   }
 
   public void selectContact(int index) {
