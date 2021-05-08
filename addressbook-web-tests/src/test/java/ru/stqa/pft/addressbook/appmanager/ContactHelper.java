@@ -46,6 +46,15 @@ public class ContactHelper extends BaseHelper {
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
+  public void editContactById(int id) {
+    wd.get("http://localhost/addressbook/view.php?id=" + id);
+    //wd.findElement(By.xpath("//a[text()='edit.php?id=" + id + "']")).click();
+  }
+
+  public void editContactByPage() {
+    wd.findElement(By.name("modifiy")).click();
+  }
+
   public void initContactModification() {
     click (By.xpath("//div[@id='content']/form/input[22]"));
   }
@@ -74,8 +83,9 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  public void modify(int index, ContactData contact) {
-    editContact(index);
+  public void modify(ContactData contact) {
+    editContactById(contact.getId());
+    editContactByPage();
     fillContactForm(contact, false);
     initContactModification();
     goHomePage();
