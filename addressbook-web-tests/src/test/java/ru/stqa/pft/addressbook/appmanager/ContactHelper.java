@@ -64,21 +64,21 @@ public class ContactHelper extends BaseHelper {
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
+  public void create(ContactData contact, boolean creation) {
     initContactCreation();
     fillContactForm(contact,creation);
     submitAddNewContact();
     goHomePage();
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     editContact(index);
     fillContactForm(contact, false);
     initContactModification();
     goHomePage();
   }
 
-  public void deletionContact(int index) {
+  public void delete (int index) {
     selectContact(index);
     deleteSelectContact();
     acceptDeleteSelectContact();
@@ -89,7 +89,7 @@ public class ContactHelper extends BaseHelper {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List <ContactData> contacts = new ArrayList<ContactData>();
     List <WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
