@@ -35,6 +35,10 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public int getId() {
     return id;
