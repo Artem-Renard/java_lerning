@@ -42,9 +42,11 @@ public class ContactHelper extends BaseHelper {
     click (By.linkText("home"));
   }
 
+  /*
   public void editContact(int index) {
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
+     */
 
   public void editContactById(int id) {
     wd.get("http://localhost/addressbook/view.php?id=" + id);
@@ -91,13 +93,6 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  public void delete (int index) {
-    selectContact(index);
-    deleteSelectContact();
-    acceptDeleteSelectContact();
-    goHomePage();
-  }
-
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectContact();
@@ -107,20 +102,6 @@ public class ContactHelper extends BaseHelper {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
-  }
-
-  public List<ContactData> list() {
-    List <ContactData> contacts = new ArrayList<ContactData>();
-    List <WebElement> elements = wd.findElements(By.name("entry"));
-    for (WebElement element : elements) {
-      List<WebElement> cells = element.findElements(By.tagName("td"));
-      int id = Integer.parseInt(element.findElement(By.xpath(".//td/input")).getAttribute("value"));
-      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
-      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
-      contacts.add(contact);
-    }
-    return contacts;
   }
 
   public Set<ContactData> all() {
