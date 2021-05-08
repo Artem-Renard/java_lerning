@@ -71,12 +71,22 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
+  public void modifyContact(int index, ContactData contact) {
+    editContact(index);
+    fillContactForm(contact, false);
+    initContactModification();
+    goHomePage();
   }
 
-  public int getContactCount() {
-    return wd.findElements(By.name("selected[]")).size();
+  public void deletionContact(int index) {
+    selectContact(index);
+    deleteSelectContact();
+    acceptDeleteSelectContact();
+    goHomePage();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 
   public List<ContactData> getContactList() {
