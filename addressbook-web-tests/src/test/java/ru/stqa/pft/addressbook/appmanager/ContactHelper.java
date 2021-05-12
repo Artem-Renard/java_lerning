@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.contacts;
+import ru.stqa.pft.addressbook.model.Сontacts;
 
 import java.util.List;
 
@@ -97,7 +97,7 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  private contacts contactCache = null;
+  private Сontacts contactCache = null;
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
@@ -107,11 +107,11 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public contacts all() {
+  public Сontacts all() {
     if (contactCache != null){
-      return new contacts(contactCache);
+      return new Сontacts(contactCache);
     }
-    contactCache = new contacts();
+    contactCache = new Сontacts();
     List <WebElement> rows = wd.findElements(By.name("entry"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));
