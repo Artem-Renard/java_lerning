@@ -82,7 +82,7 @@ public class ContactHelper extends BaseHelper {
 
   public void modify(ContactData contact) {
     editContactById(contact.getId());
-    editContactByPage();
+    //editContactByPage();
     fillContactForm(contact, false);
     initContactModification();
     contactCache = null;
