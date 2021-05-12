@@ -118,10 +118,32 @@ public class ContactHelper extends BaseHelper {
       int id = Integer.parseInt(row.findElement(By.xpath(".//td/input")).getAttribute("value"));
       String firstname = row.findElement(By.xpath(".//td[3]")).getText();
       String lastname = row.findElement(By.xpath(".//td[2]")).getText();
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String[] phones = row.findElement(By.xpath(".//td[6]")).getText().split("\n");
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              /*.withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2])*/);
     }
     return contactCache;
   }
+
+   /*
+  public Сontacts all() {
+    if (contactCache != null){
+      return new Сontacts(contactCache);
+    }
+    contactCache = new Сontacts();
+    List <WebElement> rows = wd.findElements(By.name("entry"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      String[] phones = cells.get(5).getText().split("\n");
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+    }
+    return contactCache;
+  }
+*/
 
   public ContactData infoFromEditForm (ContactData contact) {
     editContactById(contact.getId());
