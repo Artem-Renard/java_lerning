@@ -107,6 +107,7 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  /*
   public Сontacts all() {
     if (contactCache != null){
       return new Сontacts(contactCache);
@@ -120,12 +121,12 @@ public class ContactHelper extends BaseHelper {
       String lastname = row.findElement(By.xpath(".//td[2]")).getText();
       String[] phones = row.findElement(By.xpath(".//td[6]")).getText().split("\n");
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              /*.withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2])*/);
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return contactCache;
   }
+*/
 
-   /*
   public Сontacts all() {
     if (contactCache != null){
       return new Сontacts(contactCache);
@@ -143,7 +144,6 @@ public class ContactHelper extends BaseHelper {
     }
     return contactCache;
   }
-*/
 
   public ContactData infoFromEditForm (ContactData contact) {
     editContactById(contact.getId());
