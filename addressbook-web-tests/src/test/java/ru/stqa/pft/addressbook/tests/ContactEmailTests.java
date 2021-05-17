@@ -11,22 +11,23 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 
 public class ContactEmailTests extends TestBase {
   @Test
-  public void testContactPhone() {
+  public void testContactEmail() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
   }
 
-  private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+  private String mergeEmail(ContactData contact) {
+    return Arrays.asList(contact.getEmail())
             .stream().filter((s) -> ! s.equals(""))
-            .map(ru.stqa.pft.addressbook.tests.ContactPhoneTests::cleaned)
+            /*.map(ru.stqa.pft.addressbook.tests.ContactEmailTests::cleaned)*/
             .collect(Collectors.joining("\n"));
   }
 
+  /*
   public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]","");
+    */
   }
-}
