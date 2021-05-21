@@ -12,3 +12,15 @@ dependencies {
     implementation 'com.beust:jcommander:1.81'
     implementation 'com.thoughtworks.xstream:xstream:1.4.17'
 }
+
+task testGroups(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+}
