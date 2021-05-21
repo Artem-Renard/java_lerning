@@ -1,0 +1,29 @@
+[
+  {
+    "id": 2147483647,
+    "firstname": "Firstname 0",
+    "lastname": "Lastname 0",
+    "group": "[none]",
+    "photo": {
+      "path": "src\\test\\resources\\watermelon.png"
+    }
+  },
+  {
+    "id": 2147483647,
+    "firstname": "Firstname 1",
+    "lastname": "Lastname 1",
+    "group": "[none]",
+    "photo": {
+      "path": "src\\test\\resources\\watermelon.png"
+    }
+  },
+  {
+    "id": 2147483647,
+    "firstname": "Firstname 2",
+    "lastname": "Lastname 2",
+    "group": "[none]",
+    "photo": {
+      "path": "src\\test\\resources\\watermelon.png"
+    }
+  }
+]
