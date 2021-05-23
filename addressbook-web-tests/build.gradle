@@ -11,6 +11,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.6.1'
     implementation 'com.beust:jcommander:1.81'
     implementation 'com.thoughtworks.xstream:xstream:1.4.17'
+    implementation 'ch.qos.logback:logback-classic:1.1.5'
 }
 
 task testGroups(type: Test) {
