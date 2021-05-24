@@ -1,0 +1,2 @@
+3502 [main] INFO  r.s.pft.addressbook.tests.TestBase - Start test testBadContactCreation with parameters []
+9062 [main] INFO  r.s.pft.addressbook.tests.TestBase - Stop test testBadContactCreation with parameters [Ljava.lang.Object;@4e8e8621
