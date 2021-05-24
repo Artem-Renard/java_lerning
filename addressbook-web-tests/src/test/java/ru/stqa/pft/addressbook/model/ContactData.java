@@ -74,9 +74,12 @@ public class ContactData {
   private String group;
 
   @Expose
+  @Transient
+  /*
   @Column(name = "photo")
   @Type(type = "text")
-  private String photo;
+  */
+  private File photo;
 
   public ContactData withId(int id) {
     this.id = id;
@@ -144,7 +147,7 @@ public class ContactData {
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo.getPath();
+    this.photo = photo;
     return this;
   }
 
@@ -202,7 +205,7 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    return photo;
   }
 
   @Override
