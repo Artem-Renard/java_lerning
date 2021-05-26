@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -36,7 +37,6 @@ public class ContactDataGenerator {
       return;
     }
     generator.run();
-
   }
 
   private void run() throws IOException {
@@ -73,8 +73,7 @@ public class ContactDataGenerator {
     System.out.println(new File(".").getAbsolutePath());
     try (Writer writer = new FileWriter(file)) {
       for (ContactData contact : contacts) {
-        writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getGroup(),
-        contact.getPhoto()));
+        writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getPhoto()));
       }
     }
   }
@@ -83,8 +82,7 @@ public class ContactDataGenerator {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstname(String.format("Firstname %s", i))
-      .withLastname(String.format("Lastname %s", i)).withGroup(String.format("[none]")).
-      withPhoto(new File(String.format("src/test/resources/watermelon.png"))));
+      .withLastname(String.format("Lastname %s", i)).withPhoto(new File(String.format("src/test/resources/watermelon.png"))));
     }
     return contacts;
   }

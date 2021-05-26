@@ -4,7 +4,6 @@ import com.google.common.collect.ForwardingSet;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Groups extends ForwardingSet<GroupData> {
