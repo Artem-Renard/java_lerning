@@ -3,10 +3,12 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
@@ -53,6 +55,14 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
+  @BeforeMethod
+  public void ensurePreconditions () {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test3"));
+    }
+  }
+
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
@@ -67,11 +77,11 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testBadContactCreation() {
     Groups groups = app.db().groups();
-    ContactData newContact = new ContactData().withFirstname("TestName1'")
+    ContactData newBadContact = new ContactData().withFirstname("TestName1'")
     .withLastname("TestLastName1").inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
-    app.contact().create(newContact, true);
+    app.contact().create(newBadContact, true);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size()));
