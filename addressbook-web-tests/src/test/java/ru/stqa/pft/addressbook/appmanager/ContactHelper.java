@@ -74,12 +74,20 @@ public class ContactHelper extends BaseHelper {
     new Select(wd.findElement(By.cssSelector("select[name=\"to_group\"]"))).selectByValue("" + groupsId +"");
   }
 
+  public void selectGroupWithContacts(int groupsId) {
+    new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByValue("" + groupsId +"");
+  }
+
   public void addGroupToContact() {
     wd.findElement(By.name("add")).click();
   }
 
+  public void deleteContactFromGroup() {
+    wd.findElement(By.name("remove")).click();
+  }
+
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();;
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void deleteSelectContact() {
