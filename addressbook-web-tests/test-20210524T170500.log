@@ -1,8 +1,0 @@
-3433 [main] INFO  r.s.pft.addressbook.tests.TestBase - Start test testBadContactCreation with parameters []
-12896 [main] INFO  r.s.pft.addressbook.tests.TestBase - Stop test testBadContactCreation with parameters [Ljava.lang.Object;@270b6b5e
-12942 [main] INFO  r.s.pft.addressbook.tests.TestBase - Start test testContactCreation with parameters [ContactData{id=2147483647, firstname='Firstname 0', lastname='Lastname 0'}]
-19235 [main] INFO  r.s.pft.addressbook.tests.TestBase - Stop test testContactCreation with parameters [Ljava.lang.Object;@e26af6
-19235 [main] INFO  r.s.pft.addressbook.tests.TestBase - Start test testContactCreation with parameters [ContactData{id=2147483647, firstname='Firstname 1', lastname='Lastname 1'}]
-25322 [main] INFO  r.s.pft.addressbook.tests.TestBase - Stop test testContactCreation with parameters [Ljava.lang.Object;@34208baa
-25323 [main] INFO  r.s.pft.addressbook.tests.TestBase - Start test testContactCreation with parameters [ContactData{id=2147483647, firstname='Firstname 2', lastname='Lastname 2'}]
-31920 [main] INFO  r.s.pft.addressbook.tests.TestBase - Stop test testContactCreation with parameters [Ljava.lang.Object;@291a4791

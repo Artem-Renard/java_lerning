@@ -195,10 +195,6 @@ public class ContactData {
     return email3;
   }
 
-  /*public String getGroup() {
-    return group;
-  }*/
-
   public Groups getGroups() {
     return new Groups(groups);
   }
