@@ -48,6 +48,10 @@ public class GroupHelper extends BaseHelper {
     click(By.linkText("groups"));
   }
 
+  public int count(){
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
   public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
@@ -74,14 +78,6 @@ public class GroupHelper extends BaseHelper {
 
   private Groups groupCache = null;
 
-  public int count(){
-    return wd.findElements(By.name("selected[]")).size();
-  }
-
-  public boolean isThereAGroup() {
-    return isElementPresent(By.name("selected[]"));
-  }
-
   public Groups all() {
     if (groupCache != null){
       return new Groups(groupCache);
@@ -95,4 +91,9 @@ public class GroupHelper extends BaseHelper {
     }
     return new Groups(groupCache);
   }
+
+  public boolean isThereAGroup() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
 }

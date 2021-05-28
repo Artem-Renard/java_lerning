@@ -16,10 +16,6 @@ public class ContactHelper extends BaseHelper {
     super(wd);
   }
 
-  public void submitAddNewContact() {
-    wd.findElement(By.name("submit")).click();
-  }
-
   public void fillContactForm(ContactData contactData, boolean creation) {
     type (By.name("firstname"), contactData.getFirstname());
     type (By.name("lastname"), contactData.getLastname());
@@ -42,6 +38,10 @@ public class ContactHelper extends BaseHelper {
     }
    }
 
+  public void submitAddNewContact() {
+    wd.findElement(By.name("submit")).click();
+  }
+
   public void initContactCreation() {
     click (By.linkText("add new"));
   }
@@ -54,16 +54,8 @@ public class ContactHelper extends BaseHelper {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
   }
 
-  public void editContactByPage() {
-    wd.findElement(By.name("modifiy")).click();
-  }
-
   public void initContactModification() {
     click (By.xpath("//div[@id='content']/form/input[22]"));
-  }
-
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void selectAllGroupForContacts() {
@@ -99,6 +91,10 @@ public class ContactHelper extends BaseHelper {
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
+  public int count(){
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
   public void create(ContactData contact, boolean creation) {
     initContactCreation();
     fillContactForm(contact,creation);
@@ -123,19 +119,7 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  public void addToGroup (ContactData contact) {
-    selectContactById(contact.getId());
-  }
-
   private Contacts contactCache = null;
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
-  }
-
-  public int count(){
-    return wd.findElements(By.name("selected[]")).size();
-  }
 
   public Contacts all() {
     if (contactCache != null){
@@ -179,6 +163,20 @@ public class ContactHelper extends BaseHelper {
             .withEmail(email).withEmail2(email2).withEmail3(email3);
   }
 
+  public void editContactByPage() {
+    wd.findElement(By.name("modifiy")).click();
+  }
 
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void addToGroup (ContactData contact) {
+    selectContactById(contact.getId());
+  }
+
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+  }
 
 }

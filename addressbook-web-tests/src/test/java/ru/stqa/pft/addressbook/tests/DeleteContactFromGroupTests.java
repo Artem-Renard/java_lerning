@@ -11,10 +11,12 @@ public class DeleteContactFromGroupTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    // проверка в БД наличие групп и если их нет, то создание одной
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test3"));
     }
+    // проверка в БД наличие контактов и если их нет, то создание одного
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
       Groups groups = app.db().groups();
@@ -24,13 +26,12 @@ public class DeleteContactFromGroupTests extends TestBase {
 
   @Test
   public void testDeleteContactFromGroup() {
-    Contacts contact = app.db().contacts(); //список контактов из бд
-    ContactData contactForGroup = contact.iterator().next(); // выбор произвольного контакта с группой
-    int contactIdForGroup = contactForGroup.getGroups().iterator().next().getId();
+    Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
+    ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта с группой
     app.goTo().homePage();
-    app.contact().selectGroupWithContacts(contactIdForGroup); // в выпадающем списке выбрали имя группы в которую входит сонтакт
-    app.contact().selectContactById(contactForGroup.getId());
-    app.contact().deleteContactFromGroup();
+    app.contact().selectGroupWithContacts(modifiedContact.getGroups().iterator().next().getId()); // в выпадающем списке выбрали имя группы в которую входит контакт
+    app.contact().selectContactById(modifiedContact.getId()); // выбор изменяемого контакта по Id
+    app.contact().deleteContactFromGroup(); // удаление изменяемого контакта из группы
     app.goTo().homePage();
   }
 }

@@ -12,10 +12,12 @@ public class AddContactToGroupTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions () {
+    // проверка в БД наличие групп и если их нет, то создание одной
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test3"));
     }
+    // проверка в БД наличие контактов и если их нет, то создание одного
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
       Groups groups = app.db().groups();
@@ -25,14 +27,14 @@ public class AddContactToGroupTests extends TestBase {
 
   @Test
   public void testAddContactToGroup() {
-    Contacts contact = app.db().contacts();
-    Groups group = app.db().groups();
-    ContactData contactForGroup = contact.iterator().next(); // выбор произвольного контакта
-    GroupData groupForContact = group.iterator().next(); // выбор произвольной группы
+    Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
+    Groups beforeGroup = app.db().groups(); // получение списка групп до теста
+    ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта
+    GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
     app.goTo().homePage();
-    app.contact().selectAllGroupForContacts();
-    app.contact().selectContactById(contactForGroup.getId());
-    app.contact().selectGroupForAddingToContact(groupForContact.getId());
+    app.contact().selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
+    app.contact().selectContactById(modifiedContact.getId()); // выбор контакта по Id
+    app.contact().selectGroupForAddingToContact(modifiedGroup.getId()); // выбор группы для добавления в нее контакта
     app.contact().addGroupToContact();
     app.goTo().homePage();
   }
