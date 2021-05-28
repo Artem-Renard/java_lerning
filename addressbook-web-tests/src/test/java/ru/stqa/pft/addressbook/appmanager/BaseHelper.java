@@ -36,7 +36,14 @@ public class BaseHelper {
      wd.findElement(locator).sendKeys(file.getAbsolutePath());
       }
 
-
+  protected boolean isElementPresent(By locator) {
+    try {
+      wd.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
+      return false;
+    }
+    }
 
   private boolean isAlertPresent() {
     try {
@@ -46,13 +53,4 @@ public class BaseHelper {
       return false;
     }
   }
-
-  protected boolean isElementPresent(By locator) {
-    try {
-      wd.findElement(locator);
-      return true;
-    } catch (NoSuchElementException ex) {
-      return false;
-    }
-    }
 }

@@ -58,15 +58,6 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
   public GroupHelper group() {
     return groupHelper;
   }
@@ -79,11 +70,21 @@ public class ApplicationManager {
     return navigationHelper;
   }
 
+  public DbHelper db () {
+    return  dbHelper;
+  }
+
+
   public SessionHelper getSessionHelper() {
     return sessionHelper;
   }
 
-  public DbHelper db () {
-    return  dbHelper;
+  private boolean isElementPresent(By by) {
+    try {
+      wd.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
   }
 }
