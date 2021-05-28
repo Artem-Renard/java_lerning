@@ -10,14 +10,15 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 public class AddContactToGroupTests extends TestBase {
 
+  // предусловие, инициализация локальная - подготовка состояния
   @BeforeMethod
   public void ensurePreconditions () {
-    // проверка в БД наличие групп и если их нет, то создание одной
+    // проверка наличия в БД групп, если их нет, то создает одну
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test3"));
     }
-    // проверка в БД наличие контактов и если их нет, то создание одного
+    // проверка наличия в БД контакта, если его нет, то создает один
     if (app.db().contacts().size() == 0) {
       app.goTo().homePage();
       Groups groups = app.db().groups();

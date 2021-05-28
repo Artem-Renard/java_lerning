@@ -22,6 +22,20 @@ public class DeleteContactFromGroupTests extends TestBase {
       Groups groups = app.db().groups();
       app.contact().create(new ContactData().withFirstname("TestName").inGroup(groups.iterator().next()), true);
     }
+    // проверка наличия контакта в группе
+    Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
+    ContactData contactForGroup = beforeContact.iterator().next(); // выбор произвольного контакта с группой
+    if (contactForGroup.getGroups().size() == 0) {
+      Groups beforeGroup = app.db().groups(); // получение списка групп до теста
+      ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта
+      GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
+      app.goTo().homePage();
+      app.contact().selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
+      app.contact().selectContactById(modifiedContact.getId()); // выбор контакта по Id
+      app.contact().selectGroupForAddingToContact(modifiedGroup.getId()); // выбор группы для добавления в нее контакта
+      app.contact().addGroupToContact();
+      app.goTo().homePage();
+    }
   }
 
   @Test
