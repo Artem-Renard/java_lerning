@@ -7,6 +7,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 
 public class AddContactToGroupTests extends TestBase {
 
@@ -32,12 +35,18 @@ public class AddContactToGroupTests extends TestBase {
     Groups beforeGroup = app.db().groups(); // получение списка групп до теста
     ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта
     GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
+    Groups beforeInGroups = app.db().groups(); // до добавления контакта в группы
     app.goTo().homePage();
     app.contact().selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
     app.contact().selectContactById(modifiedContact.getId()); // выбор контакта по Id
     app.contact().selectGroupForAddingToContact(modifiedGroup.getId()); // выбор группы для добавления в нее контакта
     app.contact().addGroupToContact();
     app.goTo().homePage();
-  }
 
+    Contacts afterContact = app.db().contacts();
+    assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение колич-ва контактов
+    Groups afterInGroups = app.db().groups(); // после добавления контакта в группы
+    assertThat((afterInGroups), equalTo(new Groups(beforeInGroups.withAdded(modifiedGroup)))); // проверка на соответствие
+
+  }
 }

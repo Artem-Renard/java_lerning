@@ -7,6 +7,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 public class DeleteContactFromGroupTests extends TestBase {
 
   @BeforeMethod
@@ -42,10 +45,22 @@ public class DeleteContactFromGroupTests extends TestBase {
   public void testDeleteContactFromGroup() {
     Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
     ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта с группой
+    Groups beforeInGroups = app.db().groups(); // до удаления контакта в группы
+    int id = modifiedContact.getGroups().iterator().next().getId(); //
     app.goTo().homePage();
-    app.contact().selectGroupWithContacts(modifiedContact.getGroups().iterator().next().getId()); // в выпадающем списке выбрали имя группы в которую входит контакт
+    app.contact().selectGroupWithContacts(id); // в выпадающем списке выбрали имя группы в которую входит контакт
     app.contact().selectContactById(modifiedContact.getId()); // выбор изменяемого контакта по Id
     app.contact().deleteContactFromGroup(); // удаление изменяемого контакта из группы
     app.goTo().homePage();
+
+   /* // группа из которой удалили контакт
+    GroupData groupForContact = modifiedContact.getGroups().stream().filter(g -> g.getName()).equals(id).findFirst().get();
+
+    Contacts afterContact = app.db().contacts(); // хэширование по размеру контактов , если падает то дальше тест не выполняется
+    assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение количества контактов
+
+    Groups afterInGroups = app.db().groups(); // после удаление контакта из группы
+    assertThat((afterInGroups), equalTo(new Groups(beforeInGroups.without(groupForContact)))); // проверка на соответствие
+    */
   }
 }
