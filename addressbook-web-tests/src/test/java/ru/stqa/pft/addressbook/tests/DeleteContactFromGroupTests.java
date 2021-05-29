@@ -42,6 +42,7 @@ public class DeleteContactFromGroupTests extends TestBase {
 
   @Test
   public void testDeleteContactFromGroup() {
+    Contacts beforeContactWithGroup = app.db().contactInGroup(); // получение списка контактов c группами до теста
     Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
     ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта с группой
     String name = modifiedContact.getGroups().iterator().next().getName();
@@ -52,7 +53,7 @@ public class DeleteContactFromGroupTests extends TestBase {
     Contacts afterContact = app.db().contacts(); // хэширование по размеру контактов , если падает то дальше тест не выполняется
     assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение количества контактов
 
-    assertThat(beforeContact, equalTo(beforeContact.without(modifiedContact)));// проверка на соответствие
+    assertThat(beforeContactWithGroup, equalTo(beforeContactWithGroup.without(modifiedContact)));// проверка на соответствие
 
   }
 }
