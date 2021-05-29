@@ -42,18 +42,24 @@ public class DeleteContactFromGroupTests extends TestBase {
 
   @Test
   public void testDeleteContactFromGroup() {
-    Contacts beforeContactWithGroup = app.db().contactInGroup(); // получение списка контактов c группами до теста
-    Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
-    ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта с группой
-    String name = modifiedContact.getGroups().iterator().next().getName();
+    Contacts beforeContact = app.db().contacts(); //список контактов из бд
+    ContactData contactForGroup = beforeContact.iterator().next(); // выбор произвольного контакта
+    Groups beforeInGroups = app.db().contactAllCountGroups(); // до удаления контакта в группы
+    String name = contactForGroup.getGroups().iterator().next().getName();
     app.goTo().homePage();
-    app.contact().contactDelToGroup(modifiedContact, name);
+    app.contact().contactDelToGroup(contactForGroup, name);
     app.goTo().homePage();
 
-    Contacts afterContact = app.db().contacts(); // хэширование по размеру контактов , если падает то дальше тест не выполняется
-    assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение количества контактов
+    // группа из которой удалили контакт
+    GroupData groupForContact = contactForGroup.getGroups()
+            .stream().filter(g -> g.getName().equals(name)).findFirst().get();
 
-    assertThat(beforeContactWithGroup, equalTo(beforeContactWithGroup.without(modifiedContact)));// проверка на соответствие
+    Contacts afterContact = app.db().contacts();
+    // хэширование по размеру контактов , если падает то дальше тест не выполняется
+    assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение колич-ва контактов
 
+    Groups afterInGroups = app.db().contactAllCountGroups(); // после удаление контакта из группы
+    // проверка на соответствие
+    assertThat((afterInGroups), equalTo(new Groups(beforeInGroups.without(groupForContact))));
   }
 }
