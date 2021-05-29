@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -33,10 +35,7 @@ public class DeleteContactFromGroupTests extends TestBase {
       ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта
       GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
       app.goTo().homePage();
-      app.contact().selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
-      app.contact().selectContactById(modifiedContact.getId()); // выбор контакта по Id
-      app.contact().selectGroupForAddingToContact(modifiedGroup.getId()); // выбор группы для добавления в нее контакта
-      app.contact().addGroupToContact();
+      app.contact().contactAddToGroup(modifiedContact, modifiedGroup.getName());
       app.goTo().homePage();
     }
   }
@@ -45,22 +44,15 @@ public class DeleteContactFromGroupTests extends TestBase {
   public void testDeleteContactFromGroup() {
     Contacts beforeContact = app.db().contacts(); // получение списка контактов до теста
     ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта с группой
-    Groups beforeInGroups = app.db().groups(); // до удаления контакта в группы
-    int id = modifiedContact.getGroups().iterator().next().getId(); //
+    String name = modifiedContact.getGroups().iterator().next().getName();
     app.goTo().homePage();
-    app.contact().selectGroupWithContacts(id); // в выпадающем списке выбрали имя группы в которую входит контакт
-    app.contact().selectContactById(modifiedContact.getId()); // выбор изменяемого контакта по Id
-    app.contact().deleteContactFromGroup(); // удаление изменяемого контакта из группы
+    app.contact().contactDelToGroup(modifiedContact, name);
     app.goTo().homePage();
-
-   /* // группа из которой удалили контакт
-    GroupData groupForContact = modifiedContact.getGroups().stream().filter(g -> g.getName()).equals(id).findFirst().get();
 
     Contacts afterContact = app.db().contacts(); // хэширование по размеру контактов , если падает то дальше тест не выполняется
     assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение количества контактов
 
-    Groups afterInGroups = app.db().groups(); // после удаление контакта из группы
-    assertThat((afterInGroups), equalTo(new Groups(beforeInGroups.without(groupForContact)))); // проверка на соответствие
-    */
+    assertThat(beforeContact, equalTo(beforeContact.without(modifiedContact)));// проверка на соответствие
+
   }
 }

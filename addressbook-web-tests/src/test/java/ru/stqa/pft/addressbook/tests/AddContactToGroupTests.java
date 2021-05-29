@@ -37,10 +37,7 @@ public class AddContactToGroupTests extends TestBase {
     GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
     Groups beforeInGroups = app.db().groups(); // до добавления контакта в группы
     app.goTo().homePage();
-    app.contact().selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
-    app.contact().selectContactById(modifiedContact.getId()); // выбор контакта по Id
-    app.contact().selectGroupForAddingToContact(modifiedGroup.getId()); // выбор группы для добавления в нее контакта
-    app.contact().addGroupToContact();
+    app.contact().contactAddToGroup(modifiedContact, modifiedGroup.getName());
     app.goTo().homePage();
 
     Contacts afterContact = app.db().contacts();

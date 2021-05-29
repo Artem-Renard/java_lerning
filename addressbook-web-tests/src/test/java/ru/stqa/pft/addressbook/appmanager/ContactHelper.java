@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -62,12 +63,24 @@ public class ContactHelper extends BaseHelper {
     new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByVisibleText("[all]");
   }
 
+  /*
   public void selectGroupForAddingToContact(int groupsId) {
     new Select(wd.findElement(By.cssSelector("select[name=\"to_group\"]"))).selectByValue("" + groupsId +"");
   }
+   */
 
+  /*
   public void selectGroupWithContacts(int groupsId) {
     new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByValue("" + groupsId +"");
+  }
+   */
+
+  public void selectGroupForAddingToContact(String name) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+  }
+
+  public void selectGroupWithContacts(String name) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
   }
 
   public void addGroupToContact() {
@@ -117,6 +130,19 @@ public class ContactHelper extends BaseHelper {
     acceptDeleteSelectContact();
     contactCache = null;
     goHomePage();
+  }
+
+  public void contactAddToGroup(ContactData contact, String name) {
+    selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
+    selectContactById(contact.getId()); // выбрали (отметили) контакт в форме
+    selectGroupForAddingToContact(name); // в выпадающем списке выбрали имя
+    addGroupToContact(); // активировали кнопку добавить группу
+  }
+
+  public void contactDelToGroup(ContactData contact, String name) {
+    selectGroupWithContacts(name); // в выпадающем списке выбрали имя группы в которую входит контакт
+    selectContactById(contact.getId()); // выбрали (отметили) контакт в форме
+    deleteContactFromGroup(); // активировали кнопку удалить контакт из выбранной группы с именем name
   }
 
   private Contacts contactCache = null;
