@@ -75,8 +75,8 @@ public class ContactHelper extends BaseHelper {
   }
    */
 
-  public void selectGroupForAddingToContact(String name) {
-    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+  public void selectGroupForAddingToContact(GroupData group) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
   }
 
   public void selectGroupWithContacts(String name) {
@@ -102,6 +102,10 @@ public class ContactHelper extends BaseHelper {
   public void acceptDeleteSelectContact() {
     wd.switchTo().alert().accept();
     wd.findElement(By.cssSelector("div.msgbox"));
+  }
+
+  public void filterByGroup(GroupData groupsList) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(groupsList.getName());
   }
 
   public int count(){
@@ -132,15 +136,15 @@ public class ContactHelper extends BaseHelper {
     goHomePage();
   }
 
-  public void contactAddToGroup(ContactData contact, String name) {
-    selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов
+  public void contactAddToGroup(ContactData contact, GroupData group) {
+    /*selectAllGroupForContacts(); // выбор всех контактов (all) на странице контактов*/
     selectContactById(contact.getId()); // выбрали (отметили) контакт в форме
-    selectGroupForAddingToContact(name); // в выпадающем списке выбрали имя
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName()); // в выпадающем списке выбрали имя
     addGroupToContact(); // активировали кнопку добавить группу
   }
 
-  public void contactDelToGroup(ContactData contact, String name) {
-    selectGroupWithContacts(name); // в выпадающем списке выбрали имя группы в которую входит контакт
+  public void contactDelToGroup(ContactData contact) {
+    /*selectGroupWithContacts(name); // в выпадающем списке выбрали имя группы в которую входит контакт*/
     selectContactById(contact.getId()); // выбрали (отметили) контакт в форме
     deleteContactFromGroup(); // активировали кнопку удалить контакт из выбранной группы с именем name
   }

@@ -27,6 +27,8 @@ public class AddContactToGroupTests extends TestBase {
       Groups groups = app.db().groups();
       app.contact().create(new ContactData().withFirstname("TestName").inGroup(groups.iterator().next()), true);
     }
+
+
   }
 
   @Test
@@ -37,7 +39,7 @@ public class AddContactToGroupTests extends TestBase {
     GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
     Groups beforeInGroups = app.db().groups(); // до добавления контакта в группы
     app.goTo().homePage();
-    app.contact().contactAddToGroup(modifiedContact, modifiedGroup.getName());
+    app.contact().contactAddToGroup(modifiedContact, modifiedGroup);
     app.goTo().homePage();
 
     Contacts afterContact = app.db().contacts();

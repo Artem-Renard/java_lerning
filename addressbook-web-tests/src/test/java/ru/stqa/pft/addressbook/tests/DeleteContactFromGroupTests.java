@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -35,7 +33,7 @@ public class DeleteContactFromGroupTests extends TestBase {
       ContactData modifiedContact = beforeContact.iterator().next(); // выбор произвольного контакта
       GroupData modifiedGroup = beforeGroup.iterator().next(); // выбор произвольной группы
       app.goTo().homePage();
-      app.contact().contactAddToGroup(modifiedContact, modifiedGroup.getName());
+      app.contact().contactAddToGroup(modifiedContact, modifiedGroup);
       app.goTo().homePage();
     }
   }
@@ -44,10 +42,10 @@ public class DeleteContactFromGroupTests extends TestBase {
   public void testDeleteContactFromGroup() {
     Contacts beforeContact = app.db().contacts(); //список контактов из бд
     ContactData contactForGroup = beforeContact.iterator().next(); // выбор произвольного контакта
-    Groups beforeInGroups = app.db().contactAllCountGroups(); // до удаления контакта в группы
+    Groups beforeInGroups = app.db().contactCountGroups(); // до удаления контакта в группы
     String name = contactForGroup.getGroups().iterator().next().getName();
     app.goTo().homePage();
-    app.contact().contactDelToGroup(contactForGroup, name);
+    /*app.contact().contactDelToGroup(contactForGroup, name);*/
     app.goTo().homePage();
 
     // группа из которой удалили контакт
@@ -58,7 +56,7 @@ public class DeleteContactFromGroupTests extends TestBase {
     // хэширование по размеру контактов , если падает то дальше тест не выполняется
     assertThat(afterContact.size(), equalTo(beforeContact.size())); // проверка на совпадение колич-ва контактов
 
-    Groups afterInGroups = app.db().contactAllCountGroups(); // после удаление контакта из группы
+    Groups afterInGroups = app.db().contactCountGroups(); // после удаление контакта из группы
     // проверка на соответствие
     assertThat((afterInGroups), equalTo(new Groups(beforeInGroups.without(groupForContact))));
   }

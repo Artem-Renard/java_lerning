@@ -150,7 +150,15 @@ public class ContactData {
     return this;
   }
 
-
+  public ContactData ActionsWithGroup(GroupData group, Boolean toAdd) {
+    if(toAdd == true) {
+      groups.add(group);
+    }
+    else {
+      groups.remove(group);
+    }
+    return this;
+  }
 
 
   public int getId() {

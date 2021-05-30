@@ -33,6 +33,19 @@ public class DbHelper {
     return new Groups(result);
   }
 
+  public Groups contactCountGroups() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '000-00-00'").list();
+    session.getTransaction().commit();
+    session.close();
+
+    for (ContactData contact : result) {
+      return new Groups(contact.getGroups());
+    }
+    return null;
+  }
+
   public Contacts contacts() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
@@ -62,19 +75,6 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
-  }
-
-  public Groups contactAllCountGroups() {
-    Session session = sessionFactory.openSession();
-    session.beginTransaction();
-    List<ContactData> result = session.createQuery("from ContactData where deprecated = '000-00-00'").list();
-    session.getTransaction().commit();
-    session.close();
-
-    for (ContactData contact : result) {
-      return new Groups(contact.getGroups());
-    }
-    return null;
   }
 }
 
