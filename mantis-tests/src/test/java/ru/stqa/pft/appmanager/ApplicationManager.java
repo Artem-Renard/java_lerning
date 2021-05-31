@@ -42,6 +42,10 @@ public class ApplicationManager {
     wd.get(properties.getProperty("web.baseURL"));
   }
 
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
   public void stop() {
     wd.quit();
   }
@@ -53,5 +57,9 @@ public class ApplicationManager {
     } catch (NoSuchElementException e) {
       return false;
     }
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 }
