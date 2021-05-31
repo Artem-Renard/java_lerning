@@ -1,8 +1,7 @@
 package ru.stqa.pft.appmanager;
 
-import java.io.Closeable;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class HttpSession {
   private CloseableHttpClient httpClient;
