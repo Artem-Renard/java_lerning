@@ -12,7 +12,7 @@ public class RegistrationHelper {
   }
 
   public void start(String username, String email) {
-    wd.get(app.getProperty("web.baseUrl") + "/signup_page.php");
+    wd.get(app.getProperty("web.baseURL") + "/signup_page.php");
   }
 }
 
