@@ -47,7 +47,7 @@ public class HttpSession {
   }
 
   public boolean isLoggedInAs(String username) throws IOException {
-    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
+    HttpGet get = new HttpGet(app.getProperty("web.baseURL") + "/index.php");
     CloseableHttpResponse response = httpClient.execute(get);
     String body = geTextFrom(response);
     return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
