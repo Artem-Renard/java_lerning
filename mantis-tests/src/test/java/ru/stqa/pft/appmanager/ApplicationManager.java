@@ -1,6 +1,5 @@
 package ru.stqa.pft.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,6 +20,8 @@ public class ApplicationManager {
   private final String browser;
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
+  private MailHelper mailHelper;
+  private Object MailHelper;
 
   public ApplicationManager(String browser){
     this.browser = browser;
@@ -73,5 +74,12 @@ public class ApplicationManager {
       wd.get(properties.getProperty("web.baseURL"));
     }
     return wd;
+  }
+
+  public MailHelper mail() {
+    if (MailHelper == null) {
+      mailHelper = new MailHelper(this);
+    }
+    return mailHelper;
   }
 }
