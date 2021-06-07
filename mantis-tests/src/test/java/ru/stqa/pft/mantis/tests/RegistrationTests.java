@@ -33,7 +33,7 @@ public class RegistrationTests extends TestBase {
     // извлечение ссылки для подтверждения регистрации из писем отправленных на email
     String confirmationLink = findConfirmationLink(mailMessages, email);
     // подтверждение регистрации пользователя
-    app.registration().finish(confirmationLink, password);
+    app.registration().finish(confirmationLink, user, password);
     // проверка входа с помощью протокола HTTP
     assertTrue(app.newSession().login(user, password));
   }
