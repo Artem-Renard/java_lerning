@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.model.UserData;
 
-public class AdminHelper {
+public class AdministratorHelper {
 
   private final ApplicationManager app;
   private WebDriver wd;
 
-  public AdminHelper(ApplicationManager app) {
+  public AdministratorHelper(ApplicationManager app) {
     this.app = app;
     wd = app.getDriver();
   }
@@ -26,16 +26,16 @@ public class AdminHelper {
     wd.findElement(By.cssSelector("input[type='submit']")).click();
   }
 
-  public void goToManagerUsers() throws InterruptedException {
+  public void goToManageUserPage() throws InterruptedException {
     wd.get(app.getProperty("web.baseURL") + "/manage_user_page.php");
   }
 
-  public void selectManager(UserData user) {
+  public void selectManageUserEdit(UserData user) {
     wd.findElement(By.xpath("//a[@href='manage_user_edit_page.php?user_id=" + user.getId() + "']")).click();
   }
 
-  public void managerResetPassword(UserData user) {
-    selectManager(user);
+  public void resetPasswordSelectUser(UserData user) {
+    selectManageUserEdit(user);
     wd.findElement(By.cssSelector("input[value='Сбросить пароль']")).click();
   }
 

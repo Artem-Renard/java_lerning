@@ -30,44 +30,44 @@ public class ChangePasswordTests extends TestBase {
 
     Users usersList = app.db().users();
 
-    UserData manager = new UserData();
+    UserData selectUser = new UserData();
     for (UserData user : usersList) {
       if (!(user.getUsername().equals("administrator"))) {
-        manager = user;
+        selectUser = user;
         break;
       }
       i += 1;
       if (i == usersList.size()) {
         String email = String.format("user%s@localhost.localdomain", now);
-        String userNew = String.format("user%s", now);
+        String newUser = String.format("user%s", now);
         String password = "password";
-        app.registration().start(userNew, email);
+        app.registration().start(newUser, email);
         List<MailMessage> mailRegisterMessages = app.mail().waitForMail(2, 10000);
         MailMessage mailMessage=mailRegisterMessages.stream().filter((m)->m.to.equals(email)).findFirst().get();
         String confirmationLink = findConfirmationLink(mailMessage, email);
-        app.registration().finish(confirmationLink, userNew, password);
+        app.registration().finish(confirmationLink, newUser, password);
         Users usersListAfter = app.db().users();
         for (UserData eachUser : usersListAfter) {
           if (eachUser.getId() > maxId) {
-            manager = eachUser;
+            selectUser = eachUser;
           }
         }
       }
     }
 
-    String userName = "administrator";
+
+    String admin = "administrator";
     String password = "root";
-    app.adminActions().loginThroughUi(userName, password);
-    app.adminActions().goToManagerUsers();
-    app.adminActions().managerResetPassword(manager);
+    app.administratorActions().loginThroughUi(admin, password);
+    app.administratorActions().goToManageUserPage();
+    app.administratorActions().resetPasswordSelectUser(selectUser);
 
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     MailMessage mailMessage = mailMessages.get(mailMessages.size() - 1);
-    String confirmationLink = findConfirmationLink(mailMessage, manager.getEmail());
+    String confirmationLink = findConfirmationLink(mailMessage, selectUser.getEmail());
 
-    app.adminActions().changePassword(confirmationLink, manager.getUsername(), newPassword);
-    assertTrue(app.newSession().login(manager.getUsername(), newPassword));
-
+    app.administratorActions().changePassword(confirmationLink, selectUser.getUsername(), newPassword);
+    assertTrue(app.newSession().login(selectUser.getUsername(), newPassword));
   }
 
   private String findConfirmationLink(MailMessage mailMessage, String email) {
